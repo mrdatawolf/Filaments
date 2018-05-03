@@ -62,6 +62,10 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .brand {
+                font-weight: bold;
+            }
         </style>
     </head>
     <body>
@@ -81,10 +85,12 @@
                 <div class="title m-b-md">
                     Filaments.guru
                 </div>
-
                 <table border="1px solid black">
                     <thead>
                     <tr>
+                        <th>
+                            Brand
+                        </th>
                         <th>
                             Filament
                         </th>
@@ -95,31 +101,61 @@
                             Average Bed temp
                         </th>
                         <th>
+                            User Print head temp
+                        </th>
+                        <th>
+                            User Bed temp
+                        </th>
+                        <th>
                             Recommended Print head temp
                         </th>
                         <th>
                             Recommended bed temp
                         </th>
+                        <th>
+                            More Info
+                        </th>
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach($filaments as $filament)
                     <tr>
-                        <th>
-                            <a href="#"><img href="">Hatchbox </a>
-                        </th>
-                        <th>
-                            205
-                        </th>
-                        <th>
-                            50
-                        </th>
-                        <th>
-                            200
-                        </th>
-                        <th>
-                            30
-                        </th>
+                        <td class="brand">
+                            <img src="{{$filament['thumb']}}">
+                            {{$filament['brand']}}
+                        </td>
+                        <td>
+                            <a href="#"><img href="{{$filament['thumb']}}">{{$filament['name']}} </a>
+                        </td>
+                        <td>
+                            {{$filament['temps']['averaged']['head']}}
+                        </td>
+                        <td>
+                            {{$filament['temps']['user']['bed']}}
+                        </td>
+                        <td>
+                            {{$filament['temps']['user']['head']}}
+                        </td>
+                        <td>
+                            {{$filament['temps']['user']['bed']}}
+                        </td>
+                        <td>
+                            {{$filament['temps']['brand']['head']}}
+                        </td>
+                        <td>
+                            {{$filament['temps']['brand']['bed']}}
+                        </td>
+                        <td>
+                            @foreach($filament['moreInformation'] as $type => $data)
+                                @foreach($data as $subType => $subData)
+                                    @foreach($subData as $title => $video)
+                                        <a href="{{$video}}">{{$type}} - {{$title}}</a>
+                                    @endforeach
+                                @endforeach
+                            @endforeach
+                        </td>
                     </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
