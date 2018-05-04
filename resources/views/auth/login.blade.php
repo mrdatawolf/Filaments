@@ -60,6 +60,12 @@
                                 </a>
                             </div>
                         </div>
+                        <hr>
+                        <div class="form-group">
+                                <div class="col-md-6 col-md-offset-4">
+                                    @include('layouts.social')
+                                </div>
+                            </div>
                     </form>
                 </div>
             </div>

@@ -17,5 +17,12 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('welcome');
-Route::any('/filaments', 'HomeController@filaments')->name('filaments');
+Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/filaments', 'HomeController@filaments')->name('filaments');
+Route::get('/filament/create', 'HomeController@filamentAdd')->name('filamentCreateForm');
+Route::post('/filament/create', 'HomeController@filamentCreate')->name('filamentCreate');
+Route::get('/printers', 'HomeController@myPrinters')->name('myPrinters');
+
+// OAuth Routes
+Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
+Route::get('auth/{provider}/callback', 'Auth\AuthController@handleProviderCallback');

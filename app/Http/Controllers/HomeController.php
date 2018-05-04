@@ -25,59 +25,106 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
-    public function filaments()
+
+    public function filaments() 
+    { 
+        $filaments = [ 
+            [ 
+                'thumb' => '/img/amolen_thumb.jpg', 
+                'brand' => 'AMOLEN', 
+                'name'  => 'Frosted Bronze 0.5 LBS Spool - 100% USA', 
+                'width' => 1.75,
+                'tolerance' => '+/- 0.03 mm',
+                'type'  => 'PLA',
+                'temps' => [ 
+                    'averaged' => [ 
+                        'bed' => 50, 
+                        'head' => 205 
+                    ], 
+                    'user' => [ 
+                        'bed' => 50, 
+                        'head' => 205 
+                    ], 
+                    'brand' => [ 
+                        'bed' => 50, 
+                        'head' => 205 
+                    ] 
+                ], 
+                'moreInformation' => [ 
+                    'videos' => ['youtube' => ['http://youtube.com/aCoolVideo']], 
+                    'other' => ['reddit' => ['http://reddit.com/someSubReditInfo']], 
+                    'siteNotes' => ['links' => ['http://filaments.app/notes']] 
+                ] 
+            ], 
+            [ 
+                'thumb' => '/img/hatchbox_thumb.jpg', 
+                'brand' => 'HATCHBOX', 
+                'name'  => 'Yellow', 
+                'width' => 1.75,
+                'tolerance' => '+/- 0.03 mm',
+                'type'  => 'PLA',
+                'temps' => [ 
+                    'averaged' => [ 
+                        'bed' => 55, 
+                        'head' => 210 
+                    ], 
+                    'user' => [ 
+                        'bed' => 45, 
+                        'head' => 205 
+                    ], 
+                    'brand' => [ 
+                        'bed' => 50, 
+                        'head' => 200 
+                    ] 
+                ], 
+                'moreInformation' => [ 
+                    'videos' => ['youtube' => ['http://youtube.com/aCoolVideo2']], 
+                    'other' => ['reddit' => ['http://reddit.com/someSubReditInfo2']] 
+                ] 
+            ] 
+        ]; 
+         
+        return view('filaments',['filaments' => $filaments]); 
+    } 
+
+    public function myPrinters()
     {
-        $filaments = [
+        $printers = [
             [
-                'thumb' => '/img/amolen_thumb.jpg',
-                'brand' => 'AMOLEN',
-                'name'  => '3D Printer Filament, Frosted Bronze 1.75mm PLA Filament +/- 0.03 mm, 0.5 LBS Spool, includes Sample Marble Filament - 100% USA',
-                'temps' => [
-                    'averaged' => [
-                        'bed' => 50,
-                        'head' => 205
-                    ],
-                    'user' => [
-                        'bed' => 50,
-                        'head' => 205
-                    ],
-                    'brand' => [
-                        'bed' => 50,
-                        'head' => 205
-                    ]
-                ],
-                'moreInformation' => [
-                    'videos' => ['youtube' => ['http://youtube.com/aCoolVideo']],
-                    'other' => ['reddit' => ['http://reddit.com/someSubReditInfo']],
-                    'siteNotes' => ['links' => ['http://filaments.app/notes']]
-                ]
-            ],
-            [
-                'thumb' => '/img/hatchbox_thumb.jpg',
-                'brand' => 'HATCHBOX',
-                'name'  => 'HATCHBOX PLA 3D Printer Filament, Dimensional Accuracy +/- 0.03 mm, 1 kg Spool, 1.75 mm, Yellow',
-                'temps' => [
-                    'averaged' => [
-                        'bed' => 55,
-                        'head' => 210
-                    ],
-                    'user' => [
-                        'bed' => 45,
-                        'head' => 205
-                    ],
-                    'brand' => [
-                        'bed' => 50,
-                        'head' => 200
-                    ]
-                ],
-                'moreInformation' => [
-                    'videos' => ['youtube' => ['http://youtube.com/aCoolVideo2']],
-                    'other' => ['reddit' => ['http://reddit.com/someSubReditInfo2']]
+                'thumb'   => 'img/mps3v2.jpg',
+                'brand'   => 'Monoprice',
+                'model'   => 'Select Mini 3D Printer',
+                'version' => '2',
+                'other' => [
+                    'notes' => 'stuff...'
                 ]
             ]
         ];
-        
-        return view('filaments',['filaments' => $filaments]);
+        return view('printers',['printers' => $printers]); 
+    }
+
+    public function filamentAdd()
+    {
+        return view('filament.create');
+    }
+
+    public function filamentChange()
+    {
+        return view('filament.update');
+    }
+
+    public function filamentCreate()
+    {
+        return view('filaments')->sucess('filament created!(pretend)');
+    }
+
+    public function filamentRead()
+    {
+        return view('filaments')->sucess('filament read!(pretend)');
+    }
+
+    public function filamentUpdate()
+    {
+        return view('filaments')->sucess('filament updated!(pretend)');
     }
 }
