@@ -53,6 +53,7 @@
 
                                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('myPrinters') }}"><i class="fas fa-print"></i> My Printers</a>
+                                    <a class="dropdown-item" href="{{ route('myFilaments') }}"><i class="fas fa-circle-notch"></i> My Filaments</a>
                             
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
