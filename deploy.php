@@ -23,9 +23,9 @@ add('writable_dirs', []);
 // Hosts
 
 host('filaments.guru')
-  ->user('deployer')
-  ->identityFile('~/.ssh/deployerkey')
-  ->set('deploy_path', '/var/www/html/laravel-app');
+    ->user('deployer')
+    ->identityFile('~/.ssh/deployerkey')
+    ->set('deploy_path', '/var/www/html/laravel-app');
 
 // Tasks
 

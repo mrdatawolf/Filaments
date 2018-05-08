@@ -1,164 +1,76 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Filaments.guru</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-
-            .brand {
-                font-weight: bold;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-                        <a href="{{ route('register') }}">Register</a>
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Filaments.guru
-                </div>
-                <table border="1px solid black">
-                    <thead>
-                    <tr>
-                        <th>
-                            Brand
-                        </th>
-                        <th>
-                            Filament
-                        </th>
-                        <th>
-                            Average Print head temp
-                        </th>
-                        <th>
-                            Average Bed temp
-                        </th>
-                        <th>
-                            User Print head temp
-                        </th>
-                        <th>
-                            User Bed temp
-                        </th>
-                        <th>
-                            Recommended Print head temp
-                        </th>
-                        <th>
-                            Recommended bed temp
-                        </th>
-                        <th>
-                            More Info
-                        </th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @foreach($filaments as $filament)
-                    <tr>
-                        <td class="brand">
-                            <img src="{{$filament['thumb']}}">
-                            {{$filament['brand']}}
-                        </td>
-                        <td>
-                            <a href="#"><img href="{{$filament['thumb']}}">{{$filament['name']}} </a>
-                        </td>
-                        <td>
-                            {{$filament['temps']['averaged']['head']}}
-                        </td>
-                        <td>
-                            {{$filament['temps']['user']['bed']}}
-                        </td>
-                        <td>
-                            {{$filament['temps']['user']['head']}}
-                        </td>
-                        <td>
-                            {{$filament['temps']['user']['bed']}}
-                        </td>
-                        <td>
-                            {{$filament['temps']['brand']['head']}}
-                        </td>
-                        <td>
-                            {{$filament['temps']['brand']['bed']}}
-                        </td>
-                        <td>
-                            @foreach($filament['moreInformation'] as $type => $data)
-                                @foreach($data as $subType => $subData)
-                                    @foreach($subData as $title => $video)
-                                        <a href="{{$video}}">{{$type}} - {{$title}}</a>
-                                    @endforeach
-                                @endforeach
+@extends('layouts.app')
+@section('content')
+    <table border="1px solid black">
+        <thead>
+            @foreach($filaments['headers'] as $row)
+                <tr>
+                    @foreach($row as $header)
+                
+                    <th colspan="{{$header['span']}}">{{$header['text']}}</th>
+                    @endforeach
+                </tr>
+            @endforeach
+        </thead>
+        <tbody>
+            @foreach($filaments['data'] as $filament)
+            <tr>
+                <td>
+                    <img src="{{$filament['thumb']}}">
+                </td>
+                <td class="brand">
+                    {{$filament['brand']}}
+                </td>
+                <td>
+                    {{$filament['width']}}
+                </td>
+                <td>
+                    {{$filament['type']}}
+                </td>
+                <td>
+                    <a href="#">{{$filament['name']}} </a>
+                </td>
+                <td>
+                        Yours: {{$filament['temps']['user']['retraction']}}<br>
+                        Favorite: {{$filament['temps']['fav']['retraction']}}<br>
+                        Averaged: {{$filament['temps']['averaged']['retraction']}}<br>
+                        Brand: {{$filament['temps']['brand']['retraction']}}
+                </td>
+                <td>
+                        Yours: {{$filament['temps']['user']['speed']}}<br>
+                        Favorite: {{$filament['temps']['fav']['speed']}}<br>
+                        Averaged: {{$filament['temps']['averaged']['speed']}}<br>
+                        Brand: {{$filament['temps']['brand']['speed']}}
+                </td>
+                <td>
+                    Yours: {{$filament['temps']['user']['head']}}<br>
+                    Favorite: {{$filament['temps']['fav']['head']}}<br>
+                    Averaged: {{$filament['temps']['averaged']['head']}}<br>
+                    Brand: {{$filament['temps']['brand']['head']}}
+                </td>
+                <td>
+                    Yours:   {{$filament['temps']['user']['bed']}}<br>
+                    Favorite: {{$filament['temps']['fav']['bed']}}<br>
+                    Averaged: {{$filament['temps']['averaged']['bed']}}<br>
+                    Brand: {{$filament['temps']['brand']['bed']}}
+                </td>
+                <td>
+                    @foreach($filament['moreInformation'] as $type => $data)
+                        @foreach($data as $subType => $subData)
+                            @foreach($subData as $title => $video)
+                                <a href="{{$video}}">{{$type}} - {{$title}}</a>
                             @endforeach
-                        </td>
-                    </tr>
                         @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </body>
-</html>
+                    @endforeach
+                </td>
+            </tr>
+            @endforeach
+            <tr>
+                <td id="addFilament" colspan="{{count(end($filaments['headers']))}}">
+                    <a id="createFilament" href="{{route('filamentCreateForm')}}"><i class="fas fa-plus"></i>Add a new filament</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+@endsection
