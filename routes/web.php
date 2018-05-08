@@ -22,6 +22,7 @@ Route::get('/filaments', 'HomeController@filaments')->name('filaments');
 Route::get('/filament/create', 'HomeController@filamentAdd')->name('filamentCreateForm');
 Route::post('/filament/create', 'HomeController@filamentCreate')->name('filamentCreate');
 Route::get('/printers', 'HomeController@myPrinters')->name('myPrinters');
+Route::get('/myFilaments', 'HomeController@myFilaments')->name('myFilaments');
 
 // OAuth Routes
 Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');
