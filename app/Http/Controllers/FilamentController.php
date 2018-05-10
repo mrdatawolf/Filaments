@@ -7,16 +7,6 @@ use Illuminate\Http\Request;
 class FilamentController extends Controller
 {
     /**
-     * Show the index for filaments.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        return view('index');
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -24,6 +14,16 @@ class FilamentController extends Controller
     public function create()
     {
         return view('create');
+    }
+
+    /**
+     * Show the index for filaments.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('index');
     }
 
     /**
