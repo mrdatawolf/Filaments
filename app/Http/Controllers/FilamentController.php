@@ -30,15 +30,6 @@ class FilamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function read()
-    {
-        return view('read');
-    }
-
-    /**
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function update()
     {
         return view('update');
@@ -48,9 +39,9 @@ class FilamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy()
+    public function destroy($id)
     {
-        return view('delete');
+        return redirect('filaments')->with('success', 'Record was destoryed(pretend)');
     }
 
     /**
@@ -61,6 +52,6 @@ class FilamentController extends Controller
      */
     public function store(Request $request)
     {
-        return redirect('filaments')->with('success', 'Information has been added');
+        return redirect('filaments')->with('success', 'Information has been added(pretend)');
     }
 }
