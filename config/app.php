@@ -52,7 +52,7 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://filaments.app'),
+    'url' => env('APP_URL', 'https://filaments.guru'),
 
     /*
     |--------------------------------------------------------------------------

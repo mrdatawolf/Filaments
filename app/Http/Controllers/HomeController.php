@@ -43,6 +43,27 @@ class HomeController extends Controller
         ];
     }
 
+    //filament CRUD
+    //Create
+    public function filamentAdd()
+    {
+        $headers = $this->gatherFilamentHeaders();
+        
+        if(count($headers) > 1)
+        {
+            $headers = end($headers);
+        }
+        
+        return view('filament.create',['headers' => $headers]);
+    }
+
+    public function filamentCreate()
+    {
+        ddng('do create');
+        return view('filaments')->sucess('filament created!(pretend)');
+    }
+
+    //Read
     public function gatherFilamentHeaders()
     {
         $headers = [
@@ -176,13 +197,6 @@ class HomeController extends Controller
         return view('filaments',['filaments' => $filaments]); 
     } 
 
-    public function myPrinters()
-    {
-        $printers['headers'] = $this->gatherPrinterHeaders();
-        $printers['data'] = $this->gatherPrinters();
-        return view('printers',['printers' => $printers]); 
-    }
-
     public function myFilaments()
     {
         $filaments['headers'] = $this->gatherFilamentHeaders();
@@ -191,7 +205,13 @@ class HomeController extends Controller
         return $filaments;
     }
 
-    public function filamentAdd()
+    public function filamentRead()
+    {
+        return view('filaments')->sucess('filament read!(pretend)');
+    }
+
+    //Update
+    public function filamentChange()
     {
         $headers = $this->gatherFilamentHeaders();
         
@@ -200,27 +220,23 @@ class HomeController extends Controller
             $headers = end($headers);
         }
         
-        
-        return view('filament.create',['headers' => $headers]);
-    }
-
-    public function filamentChange()
-    {
-        return view('filament.update');
-    }
-
-    public function filamentCreate()
-    {
-        return view('filaments')->sucess('filament created!(pretend)');
-    }
-
-    public function filamentRead()
-    {
-        return view('filaments')->sucess('filament read!(pretend)');
+        return view('filament.update',['headers' => $headers]);
     }
 
     public function filamentUpdate()
     {
+        ddng('do update');
         return view('filaments')->sucess('filament updated!(pretend)');
+    }
+
+    //Destroy
+
+    //printer CRUD
+
+    public function myPrinters()
+    {
+        $printers['headers'] = $this->gatherPrinterHeaders();
+        $printers['data'] = $this->gatherPrinters();
+        return view('printers',['printers' => $printers]); 
     }
 }
