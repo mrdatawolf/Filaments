@@ -15,11 +15,13 @@
 
 Auth::routes();
 
-Route::resource('filaments','filamentController');
-Route::resource('printers','printerController');
+Route::resource('filaments','FilamentController');
+Route::resource('printers','PrinterController');
+Route::resource('brands','BrandController');
+Route::resource('types','TypeController');
 
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'HomeController@filaments')->name('landing');
+Route::get('/home', 'FilamentController')->name('home');
+Route::get('/', 'FilamentController')->name('landing');
 
 // OAuth Routes
 //Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');

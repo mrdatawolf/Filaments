@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Printers;
+use App\Brands;
 
-class PrinterController extends Controller
+class BrandController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -17,14 +17,14 @@ class PrinterController extends Controller
         $this->middleware('auth');
     }
 
-    /**
+     /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
      */
     public function create()
     {
-        return view('printers.create');
+        return view('brands.create');
     }
 
     /**
@@ -37,41 +37,41 @@ class PrinterController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'version' => 'required',
+            'slug' => 'required',
         ]);
-        Printers::create($request->all());
-        return redirect()->route('printers.index')
-                        ->with('success','Printer created successfully');
+        Brands::create($request->all());
+        return redirect()->route('brands.index')
+                        ->with('success','Brand created successfully');
     }
     
     /**
-     * Show the index for printers.
+     * Show the index for brand.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $printers=Printers::all();
-        if($printers->isEmpty())
+        $brands=Brands::all();
+        if($brands->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $printers = $printers->paginate(10);
+            $brands = Brands::paginate(10);
 
-            return view('printers.index',compact('printers'))->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('brands/index',compact('brands'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
     }
 
     /**
-     * Show the specified printer.
+     * Show the specified brand.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Printers $printer)
+    public function show(Brands $brand)
     {
-        return view('printers.index',compact('printer'));
+        return view('brands/index',compact('brand'));
     }
 
     /**
@@ -80,9 +80,9 @@ class PrinterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Printers $printer)
+    public function edit(Brands $brand)
     {
-        return view('printers.edit', compact('printer'));
+        return view('brands/edit', compact('brand'));
     }
 
     /**
@@ -92,15 +92,15 @@ class PrinterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Printers $printer)
+    public function update(Request $request,Brands $brand)
     {
         request()->validate([
             'name' => 'required',
-            'version' => 'required',
+            'slug' => 'required',
         ]);
-        $printer->update($request->all());
-        return redirect()->route('printers.index')
-                        ->with('success','Printer updated successfully');
+        $brand->update($request->all());
+        return redirect()->route('brands/index')
+                        ->with('success','Brand updated successfully');
     }
     
     /**
@@ -110,8 +110,8 @@ class PrinterController extends Controller
      */
     public function destroy($id)
     {
-        Printers::destroy($id);
-        return redirect()->route('printers.index')
-                        ->with('success','Printer record was destoryed');
+        Brands::destroy($id);
+        return redirect()->route('brands/index')
+                        ->with('success','Brand record was destoryed');
     }
 }

@@ -1,10 +1,9 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFilamentTypePivotTable extends Migration
+class CreateBrandFilamentPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +12,12 @@ class CreateFilamentTypePivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('filament_type', function (Blueprint $table) {
+        Schema::create('brand_filament', function (Blueprint $table) {
+            $table->integer('brand_id')->unsigned()->index();
+            $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->integer('filament_id')->unsigned()->index();
             $table->foreign('filament_id')->references('id')->on('filaments')->onDelete('cascade');
-            $table->integer('type_id')->unsigned()->index();
-            $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->primary(['filament_id', 'type_id']);
+            $table->primary(['brand_id', 'filament_id']);
         });
     }
 
@@ -29,6 +28,6 @@ class CreateFilamentTypePivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('filament_type');
+        Schema::drop('brand_filament');
     }
 }

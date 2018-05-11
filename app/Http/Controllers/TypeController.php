@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Printers;
+use App\Types;
 
-class PrinterController extends Controller
+class TypeController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,7 +24,7 @@ class PrinterController extends Controller
      */
     public function create()
     {
-        return view('printers.create');
+        return view('types.create');
     }
 
     /**
@@ -37,41 +37,41 @@ class PrinterController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'version' => 'required',
+            'slug' => 'required',
         ]);
-        Printers::create($request->all());
-        return redirect()->route('printers.index')
-                        ->with('success','Printer created successfully');
+        Types::create($request->all());
+        return redirect()->route('types.index')
+                        ->with('success','Type created successfully');
     }
     
     /**
-     * Show the index for printers.
+     * Show the index for types.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        $printers=Printers::all();
-        if($printers->isEmpty())
+        $types=Types::all();
+        if($types->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $printers = $printers->paginate(10);
-
-            return view('printers.index',compact('printers'))->with('i', (request()->input('page', 1) - 1) * 5);
+            $types = Types::paginate(10);
+            
+            return view('types.index',compact('types'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
     }
 
     /**
-     * Show the specified printer.
+     * Show the specified type.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Printers $printer)
+    public function show(Types $type)
     {
-        return view('printers.index',compact('printer'));
+        return view('types.index',compact('type'));
     }
 
     /**
@@ -80,9 +80,9 @@ class PrinterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Printers $printer)
+    public function edit(Types $type)
     {
-        return view('printers.edit', compact('printer'));
+        return view('types.edit', compact('type'));
     }
 
     /**
@@ -92,15 +92,15 @@ class PrinterController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Printers $printer)
+    public function update(Request $request,Types $type)
     {
         request()->validate([
             'name' => 'required',
-            'version' => 'required',
+            'slug' => 'required',
         ]);
-        $printer->update($request->all());
-        return redirect()->route('printers.index')
-                        ->with('success','Printer updated successfully');
+        $type->update($request->all());
+        return redirect()->route('types.index')
+                        ->with('success','Type updated successfully');
     }
     
     /**
@@ -110,8 +110,8 @@ class PrinterController extends Controller
      */
     public function destroy($id)
     {
-        Printers::destroy($id);
-        return redirect()->route('printers.index')
-                        ->with('success','Printer record was destoryed');
+        Types::destroy($id);
+        return redirect()->route('types.index')
+                        ->with('success','Type record was destoryed');
     }
 }
