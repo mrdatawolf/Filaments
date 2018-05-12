@@ -29,15 +29,13 @@ class FilamentController extends Controller
         $brands=Brands::all();
         if($brands->isEmpty())
         {
-            $brandController = new BrandController();
-           return redirect("brands/create")->withErrors('No brands were found.  Please create the filament\'s brand before attempting to add the filament.');
+           return redirect()->action('BrandController@create')->withErrors('No brands were found!  Please create a brand.');
         }
 
         $types=Types::all();
         if($types->isEmpty())
         {
-            $typeController = new TypeController();
-           return redirect("types/create")->withErrors('No types were found.  Please create the filament\'s type before attempting to add the filament.');
+           return redirect()->action('TypeController@create')->withErrors('No types were found!  Please create a type.');
         }
         
         return view('filaments/create',compact('brands','types'));
@@ -51,13 +49,33 @@ class FilamentController extends Controller
      */
     public function store(Request $request)
     {
+        $requestValues = $request->all();
         request()->validate([
             'name' => 'required',
             'width' => 'required',
             'revision' => 'required'
         ]);
-        Filaments::create($request->all());
-        return redirect()->route("filaments/index")->withSuccess("Filament created successfully");
+        $checkFor=[
+            'name' => (string) trim($requestValues['name']),
+            'width' => (double) trim($requestValues['width']),
+            'revision' => (string) trim($requestValues['revision'])
+        ];
+       // dd(Filaments::where('name','like',$requestValues['name'])->where('revision',$requestValues['revision'])->toSql());
+        if( Filaments::where('name','like',$requestValues['name'])->where('revision',$requestValues['revision'])->exists())
+        {
+            return redirect()->action('FilamentController@index')->withErrors("The filament already exists!");
+        }
+        else
+        {
+            $filament = new Filaments();
+            $filament->name=$requestValues['name'];
+            $filament->width=$requestValues['width'];
+            $filament->revision=$requestValues['revision'];
+            $filament->save();
+            $filament->brand()->attach($requestValues['brand_id']);
+            $filament->type()->attach($requestValues['type_id']);
+            return redirect()->action('FilamentController@index')->withSuccess("The filament was created successfully!");
+        }
     }
     
     /**
@@ -76,7 +94,7 @@ class FilamentController extends Controller
         {
             $filaments = Filaments::paginate(10);
 
-            return view('filaments',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('filaments/index',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
     }
 
@@ -115,7 +133,7 @@ class FilamentController extends Controller
             'version' => 'required',
         ]);
         $filament->update($request->all());
-        return redirect()->route('filaments/index')->with('success','Filament updated successfully');
+        return redirect()->route('filaments/index')->with('success','the filament updated successfully!');
     }
     
     /**
@@ -126,7 +144,7 @@ class FilamentController extends Controller
     public function destroy($id)
     {
         Filaments::destroy($id);
-        return redirect()->route('filaments/index')->with('success','Filament record was destoryed');
+        return redirect()->route('filaments/index')->with('success','The filament record was destoryed!');
     }
 
     public function gatherFilaments()

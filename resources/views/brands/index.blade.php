@@ -11,8 +11,8 @@
         <tbody>
             @foreach($brands as $brand)
             <tr>
-            <td>{{$type['name']}}</td>
-            <td>{{$type['slug']}}</td>
+            <td>{{$brand['name']}}</td>
+            <td>{{$brand['slug']}}</td>
             
             <td><a href="{{action('BrandController@edit', $brand['id'])}}" class="btn btn-warning">Edit</a></td>
             <td>

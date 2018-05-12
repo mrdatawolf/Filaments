@@ -17,14 +17,15 @@
         <tbody>
             <tr>
                 <td><label for="brand">Brand:</label>
-                    <select id="brand" name="brand">
+                    <select id="brand_id" name="brand_id">
                     @foreach($brands as $brand)
                         <option value="{{ $brand['id'] }}">{{ $brand['slug'] }}
                     @endforeach    
                     </select>
                 </td>
                 <td><label for="name">Name:</label><input type="text" id="name" name="name"></td>
-                <td><label for="type">Type:</label><select id="brand" name="brand">
+                <td><label for="type">Type:</label>
+                    <select id="type_id" name="type_id">
                     @foreach($types as $type)
                         <option value="{{ $type['id'] }}">{{ $type['slug'] }}
                     @endforeach    

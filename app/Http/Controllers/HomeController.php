@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Filaments;
+use App\Http\Controllers\FilamentController;
 
 class HomeController extends Controller
 {
@@ -51,5 +53,33 @@ class HomeController extends Controller
         $this->middleware('auth');
     }
 
-    
+    /**
+     * Show the index for filaments.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $filaments=Filaments::all();
+        if($filaments->isEmpty())
+        {
+            return redirect()->action('FilamentController@create')->withErrors('No filaments were found!  Please create a filament.');
+        }
+
+        $filaments=Filaments::with('brand')->get();
+        foreach($filaments as $filament)
+        {
+            dd($filament->toArray());
+        }
+        if($filaments->isEmpty())
+        {
+           return $this->create();
+        }
+        else
+        {
+            $filaments = Filaments::paginate(10);
+
+            return view('home',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
+        }
+    }
 }
