@@ -21,6 +21,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('style')
 </head>
 <body>
     <div id="app">
@@ -31,11 +32,15 @@
                     <i class="fas fa-bars"></i><span class="caret"></span>
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="{{ url('/brands') }}"><i class="fas fa-print"></i> Brands</a>
+                    <a class="dropdown-item" href="{{ url('/brands') }}"><i class="fas fa-trademark"></i> Brands</a>
                     <a class="dropdown-item" href="{{ url('/printers') }}"><i class="fas fa-print"></i> Printers</a>
                     <a class="dropdown-item" href="{{ url('/filaments') }}"><i class="fas fa-circle-notch"></i> Filaments</a>
-                    <a class="dropdown-item" href="{{ url('/types') }}"><i class="fas fa-print"></i> Types</a>
-                    <a class="dropdown-item" href="{{ url('/users') }}"><i class="fas fa-print"></i> Users</a>
+                    <a class="dropdown-item" href="{{ url('/types') }}"><i class="fas fa-tags"></i> Types</a>
+                    <a class="dropdown-item" href="{{ url('/users') }}"><i class="fas fa-users"></i> Users</a>
+                    <a class="dropdown-item" href="{{ url('/notes') }}"><i class="fas fa-gavel"></i> Notes</a>
+                    <a class="dropdown-item" href="{{ url('/examples') }}"><i class="fas fa-gift"></i> Examples</a>
+                    <a class="dropdown-item" href="{{ url('/issues') }}"><i class="fas fa-flag"></i> Issues</a>
+                    <a class="dropdown-item" href="{{ url('/remoteDatum') }}"><i class="fas fa-fighter-jet"></i> Remote Data</a>
                 </div>
             </div>
 

@@ -13,7 +13,7 @@
         <tbody>
             <tr>
                 <td><label for="name">Name:</label><input type="text" id="name" name="name"></td>
-                <td><label for="slug">Slug:</label><input type="text" id="slug" name="slug"></td>
+                <td><label for="slug">Short Name:</label><input type="text" id="slug" name="slug"></td>
             </tr>
             <tr>
                 <td colspan="2">

@@ -59,9 +59,11 @@ class FilamentController extends Controller
         $checkFor=[
             'name' => (string) trim($requestValues['name']),
             'width' => (double) trim($requestValues['width']),
-            'revision' => (string) trim($requestValues['revision'])
+            'revision' => (string) trim($requestValues['revision']),
+            'brandId' => (int) trim($requestValues['brand_id']),
+            'typeId' => (int) trim($requestValues['type_id'])
         ];
-       // dd(Filaments::where('name','like',$requestValues['name'])->where('revision',$requestValues['revision'])->toSql());
+       
         if( Filaments::where('name','like',$checkFor['name'])->where('revision',$checkFor['revision'])->exists())
         {
             return redirect()->action('FilamentController@index')->withErrors("The filament already exists!");
@@ -74,8 +76,8 @@ class FilamentController extends Controller
             $filament->revision=$checkFor['revision'];
             $filament->save();
 
-            $filament->brand()->attach($checkFor['brand_id']);
-            $filament->type()->attach($checkFor['type_id']);
+            $filament->brand()->attach($checkFor['brandId']);
+            $filament->type()->attach($checkFor['typeId']);
             return redirect()->action('FilamentController@index')->withSuccess("The filament was created successfully!");
         }
     }
@@ -94,7 +96,7 @@ class FilamentController extends Controller
         }
         else
         {
-            $filaments = Filaments::paginate(10);
+            $filaments = Filaments::with('types')->paginate(10);
 
             return view('filaments/index',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
         }

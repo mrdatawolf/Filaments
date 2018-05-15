@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('pageTitle','Create a brand')
+@section('pageTitle','Create a note')
 @section('content')
-<form method="post" action="{{url('brands')}}" enctype="multipart/form-data">
+<form method="post" action="{{url('notes')}}" enctype="multipart/form-data">
     @csrf
     <table class="table table-striped">
         <thead>

@@ -15,7 +15,6 @@
         <td>{{$filament['name']}}</td>
         <td>{{$filament['width']}}</td>
         <td>{{$filament['revision']}}</td>
-        
         <td><a href="{{action('FilamentController@edit', $filament['id'])}}" class="btn btn-warning">Edit</a></td>
         <td>
             <form action="{{action('FilamentController@destroy', $filament['id'])}}" method="post">

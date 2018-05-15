@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateBrandPrinterPivotTable extends Migration
+class CreateBrandsPrintersPivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,7 @@ class CreateBrandPrinterPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('brand_printer', function (Blueprint $table) {
+        Schema::create('brands_printers', function (Blueprint $table) {
             $table->integer('brand_id')->unsigned()->index();
             $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->integer('printer_id')->unsigned()->index();
@@ -28,6 +28,6 @@ class CreateBrandPrinterPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('brand_printer');
+        Schema::drop('brands_printers');
     }
 }

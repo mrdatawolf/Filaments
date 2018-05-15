@@ -63,10 +63,10 @@ class HomeController extends Controller
         $filaments=Filaments::all();
         if($filaments->isEmpty())
         {
-            return redirect()->url('FilamentController@create')->withErrors('No filaments were found!  Please create a filament.');
+            return redirect()->action('FilamentController@create')->withErrors('No filaments were found!  Please create a filament.');
         }
 
-        $filaments=Filaments::with('brand')->paginate(10);
+        $filaments=Filaments::with('brand','type')->paginate(10);
 
         return view('home',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
     }

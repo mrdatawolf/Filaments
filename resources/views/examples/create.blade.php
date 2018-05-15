@@ -1,7 +1,7 @@
 @extends('layouts.app')
-@section('pageTitle','Create a brand')
+@section('pageTitle','Create an example')
 @section('content')
-<form method="post" action="{{url('brands')}}" enctype="multipart/form-data">
+<form method="post" action="{{url('examples')}}" enctype="multipart/form-data">
     @csrf
     <table class="table table-striped">
         <thead>
@@ -13,7 +13,7 @@
         <tbody>
             <tr>
                 <td><label for="name">Name:</label><input type="text" id="name" name="name"></td>
-                <td><label for="slug">Short Name:</label><input type="text" id="slug" name="slug"></td>
+                <td><label for="slug">Slug:</label><input type="text" id="slug" name="slug"></td>
             </tr>
             <tr>
                 <td colspan="2">

@@ -20,6 +20,11 @@ Route::resource('filaments','FilamentController');
 Route::resource('printers','PrinterController');
 Route::resource('brands','BrandController');
 Route::resource('types','TypeController');
+Route::resource('examples','ExamplesController');
+Route::resource('issues','IssuesController');
+Route::resource('notes','NotesController');
+Route::resource('remoteDatum','RemoteDatumController');
+
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('landing');

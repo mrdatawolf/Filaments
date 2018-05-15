@@ -25,23 +25,23 @@ class Filaments extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
-    public function brand()
-    {
-        return $this->belongsTo('App\Brands', 'brand_id');
-    }
-
     public function type()
     {
-        return $this->belongsTo('App\Types', 'type_id');
+        return $this->belongsTo('App\Types', 'type_id', 'id');
+    }
+
+    public function brand()
+    {
+        return $this->belongsToMany('App\Brands');
     }
 
     public function users()
     {
-        return $this->hasMany('App\Users', 'user_id');
+        return $this->belongsToMany('App\Users', 'user_id');
     }
 
     public function printers()
     {
-        return $this->hasMany('App\Printers', 'printer_id');
+        return $this->belongsToMany('App\Printers', 'printer_id');
     }
 }

@@ -11,6 +11,7 @@
     </thead>
     <tbody>
         @foreach($filaments as $filament)
+        @php dd($filament); @endphp
         <tr>
         <td>{{$filament['name']}}</td>
         <td>{{$filament['width']}}</td>
