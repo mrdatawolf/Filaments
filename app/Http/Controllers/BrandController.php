@@ -82,7 +82,17 @@ class BrandController extends Controller
      */
     public function edit(Brands $brand)
     {
-        return view('brands/edit', compact('brand'));
+        $brands=Brands::all();
+        if($brands->isEmpty())
+        {
+            return $this->create();
+        }
+        else
+        {
+            $brands = Brands::paginate(10);
+
+            return view('brands/update',compact('brands'))->with('i', (request()->input('page', 1) - 1) * 5);
+        }
     }
 
     /**
@@ -92,14 +102,16 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Brands $brand)
+    public function update(Request $request,$id)
     {
         request()->validate([
             'name' => 'required',
             'slug' => 'required',
         ]);
+        $brand = Brands::find($id);
         $brand->update($request->all());
-        return redirect()->route('brands/index')
+    
+        return redirect()->route('brands.index')
                         ->with('success','Brand updated successfully');
     }
     
@@ -111,7 +123,7 @@ class BrandController extends Controller
     public function destroy($id)
     {
         Brands::destroy($id);
-        return redirect()->route('brands/index')
+        return redirect()->route('brands.index')
                         ->with('success','Brand record was destoryed');
     }
 }

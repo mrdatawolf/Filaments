@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Printers;
+use App\Brands;
+use App\Types;
 
 class PrinterController extends Controller
 {
@@ -24,7 +26,19 @@ class PrinterController extends Controller
      */
     public function create()
     {
-        return view('printers.create');
+        $brands=Brands::all();
+        if($brands->isEmpty())
+        {
+           return redirect()->action('BrandController@create')->withErrors('No brands were found!  Please create a brand.');
+        }
+
+        $types=Types::all();
+        if($types->isEmpty())
+        {
+           return redirect()->action('TypeController@create')->withErrors('No types were found!  Please create a type.');
+        }
+        
+        return view('printers/create',compact('brands','types'));
     }
 
     /**
@@ -39,9 +53,33 @@ class PrinterController extends Controller
             'name' => 'required',
             'version' => 'required',
         ]);
-        Printers::create($request->all());
-        return redirect()->route('printers.index')
-                        ->with('success','Printer created successfully');
+        $requestValues = $request->all();
+
+        $checkFor=[
+            'name' => (string) trim($requestValues['name']),
+            'version' => trim($requestValues['version'])
+        ];
+
+        if( Printers::where('name','like',$checkFor['name'])->where('version',$checkFor['version'])->exists())
+        {
+            return redirect()->action('PrinterController@index')->withErrors("The printer already exists!");
+        }
+        else
+        {
+            $printer = new Printers();
+            $printer->name = $checkFor['name'];
+            $printer->version = $checkFor['version'];
+            $printer->save();
+
+            $printer->brand()->attach($checkFor['brand_id']);
+            foreach($checkFor['type_ids'] as $typeId)
+            {
+                $printer->types()->attach($typeId);
+            }
+            
+            return redirect()->route('printers.index')
+                            ->with('success','Printer created successfully');
+        }
     }
     
     /**
@@ -58,7 +96,12 @@ class PrinterController extends Controller
         }
         else
         {
-            $printers = $printers->paginate(10);
+            $printers = Printers::with('brand')->paginate(10);
+            foreach($printers as $printer)
+            {
+
+                //dd($printer->toArray());
+            }
 
             return view('printers.index',compact('printers'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -82,7 +125,7 @@ class PrinterController extends Controller
      */
     public function edit(Printers $printer)
     {
-        return view('printers.edit', compact('printer'));
+        return view('printers.update', compact('printer'));
     }
 
     /**
@@ -95,9 +138,12 @@ class PrinterController extends Controller
     public function update(Request $request,Printers $printer)
     {
         request()->validate([
+            'brand' => 'required',
             'name' => 'required',
             'version' => 'required',
         ]);
+        dd($request->get('type_ids'));
+        //$news = implode(',', $news);
         $printer->update($request->all());
         return redirect()->route('printers.index')
                         ->with('success','Printer updated successfully');

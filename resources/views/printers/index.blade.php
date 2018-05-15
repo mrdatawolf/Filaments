@@ -1,19 +1,22 @@
 @extends('layouts.app')
-@section('pageTitle','view printers')
+@section('pageTitle','view Printers')
 @section('content')
 <table class="table table-striped">
     <thead>
         <tr>
+        <th>Brand</th>
         <th>Name</th>
-        <th>Slug</th>
+        <th>version</th>
+        <th>Types</th>
         </tr>
     </thead>
     <tbody>
         @foreach($printers as $printer)
         <tr>
+        <td>brand</td>
         <td>{{$printer['name']}}</td>
-        <td>{{$printer['width']}}</td>
-        <td>{{$printer['revision']}}</td>
+        <td>{{$printer['version']}}</td>
+        <td>types</td>
         
         <td><a href="{{action('PrinterController@edit', $printer['id'])}}" class="btn btn-warning">Edit</a></td>
         <td>
@@ -27,4 +30,8 @@
         @endforeach
     </tbody>
 </table>
+<form action="{{action('PrinterController@create')}}" method="get">
+    @csrf
+    <button class="btn" type="submit"><i class="fas fa-plus"></i>&nbsp;Create</button>
+</form>
 @endsection

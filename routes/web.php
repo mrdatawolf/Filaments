@@ -15,6 +15,7 @@
 
 Auth::routes();
 
+Route::resource('users','UserController');
 Route::resource('filaments','FilamentController');
 Route::resource('printers','PrinterController');
 Route::resource('brands','BrandController');

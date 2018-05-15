@@ -25,20 +25,29 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+            <!-- Left Side Of Navbar -->
+            <div class="nav-item dropdown">
+                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                    <i class="fas fa-bars"></i><span class="caret"></span>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ url('/brands') }}"><i class="fas fa-print"></i> Brands</a>
+                    <a class="dropdown-item" href="{{ url('/printers') }}"><i class="fas fa-print"></i> Printers</a>
+                    <a class="dropdown-item" href="{{ url('/filaments') }}"><i class="fas fa-circle-notch"></i> Filaments</a>
+                    <a class="dropdown-item" href="{{ url('/types') }}"><i class="fas fa-print"></i> Types</a>
+                    <a class="dropdown-item" href="{{ url('/users') }}"><i class="fas fa-print"></i> Users</a>
+                </div>
+            </div>
+
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/filaments') }}">
-                    {{ config('app.name', 'Laravel') }} - @yield('pageTitle'):
-                </a>
+                    {{ config('app.name', 'Laravel') }}
+                </a> ->&nbsp;&nbsp;@yield('pageTitle'):
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
-
-                    </ul>
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->

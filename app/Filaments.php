@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
  * Filaments class
  * @property-read Brands        $brand
  * @property-read Types         $type
+ * @property-read Users         $users
+ * @property-read Printers      $printers
  * @property int                $id
  * @property string             $name
  * @property string             $width
@@ -31,5 +33,15 @@ class Filaments extends Model
     public function type()
     {
         return $this->belongsTo('App\Types', 'type_id');
+    }
+
+    public function users()
+    {
+        return $this->hasMany('App\Users', 'user_id');
+    }
+
+    public function printers()
+    {
+        return $this->hasMany('App\Printers', 'printer_id');
     }
 }

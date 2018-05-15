@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Types;
+use App\User;
+use App\Http\Controllers\Auth;
 
-class TypeController extends Controller
+class UserController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,7 +25,7 @@ class TypeController extends Controller
      */
     public function create()
     {
-        return view('types.create');
+        return redirect()->route('auth.create');
     }
 
     /**
@@ -35,13 +36,7 @@ class TypeController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate([
-            'name' => 'required',
-            'slug' => 'required',
-        ]);
-        Types::create($request->all());
-        return redirect()->route('types.index')
-                        ->with('success','Type created successfully');
+        //
     }
     
     /**
@@ -51,27 +46,27 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types=Types::all();
-        if($types->isEmpty())
+        $users=User::all();
+        if($users->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $types = Types::paginate(10);
+            $users = User::paginate(10);
             
-            return view('types.index',compact('types'))->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('users.index',compact('users'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
     }
 
     /**
-     * Show the specified type.
+     * Show the specified users.
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Types $type)
+    public function show(User $user)
     {
-        return view('types.index',compact('type'));
+        return view('users.index',compact('user'));
     }
 
     /**
@@ -80,19 +75,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Types $type)
+    public function edit(User $user)
     {
-        $types=Types::all();
-        if($types->isEmpty())
-        {
-            return $this->create();
-        }
-        else
-        {
-            $types = Types::paginate(10);
-
-            return view('types/update',compact('types'))->with('i', (request()->input('page', 1) - 1) * 5);
-        }
+        return view('users.update', compact('user'));
     }
 
     /**
@@ -102,16 +87,14 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,$id)
+    public function update(Request $request,User $user)
     {
         request()->validate([
             'name' => 'required',
-            'slug' => 'required',
+            'email' => 'required',
         ]);
-        $type = Types::find($id);
-        $type->update($request->all());
-        return redirect()->route('types.index')
-                        ->with('success','Type updated successfully');
+        $user->update($request->all());
+        return redirect()->route('users/index')->with('success','the user was updated successfully!');
     }
     
     /**
@@ -121,8 +104,8 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        Types::destroy($id);
-        return redirect()->route('types.index')
-                        ->with('success','Type record was destoryed');
+        User::destroy($id);
+        return redirect()->route('users.index')
+                        ->with('success','User record was destoryed');
     }
 }
