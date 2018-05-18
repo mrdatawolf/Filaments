@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExamplesIssuesPivotTable extends Migration
+class CreateExampleNotePivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateExamplesIssuesPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('examples_issues', function (Blueprint $table) {
+        Schema::create('examples_notes', function (Blueprint $table) {
             $table->integer('example_id')->unsigned()->index();
             $table->foreign('example_id')->references('id')->on('examples')->onDelete('cascade');
-            $table->integer('issue_id')->unsigned()->index();
-            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
-            $table->primary(['example_id', 'issue_id']);
+            $table->integer('note_id')->unsigned()->index();
+            $table->foreign('note_id')->references('id')->on('notes')->onDelete('cascade');
+            $table->primary(['example_id', 'note_id']);
         });
     }
 
@@ -28,6 +28,6 @@ class CreateExamplesIssuesPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('examples_issues');
+        Schema::drop('example_note');
     }
 }

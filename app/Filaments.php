@@ -25,12 +25,12 @@ class Filaments extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
-    public function type()
+    public function types()
     {
         return $this->belongsTo('App\Types', 'type_id', 'id');
     }
 
-    public function brand()
+    public function brands()
     {
         return $this->belongsToMany('App\Brands');
     }

@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePrintersTypesPivotTable extends Migration
+class CreateFilamentTypePivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +13,12 @@ class CreatePrintersTypesPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('printers_types', function (Blueprint $table) {
-            $table->integer('printer_id')->unsigned()->index();
-            $table->foreign('printer_id')->references('id')->on('printers')->onDelete('cascade');
+        Schema::create('filament_type', function (Blueprint $table) {
+            $table->integer('filament_id')->unsigned()->index();
+            $table->foreign('filament_id')->references('id')->on('filaments')->onDelete('cascade');
             $table->integer('type_id')->unsigned()->index();
             $table->foreign('type_id')->references('id')->on('types')->onDelete('cascade');
-            $table->primary(['printer_id', 'type_id']);
+            $table->primary(['filament_id', 'type_id']);
         });
     }
 
@@ -28,6 +29,6 @@ class CreatePrintersTypesPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('printers_types');
+        Schema::drop('filament_type');
     }
 }

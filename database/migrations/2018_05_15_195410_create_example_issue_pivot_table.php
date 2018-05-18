@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateExamplesRemoteDatumPivotTable extends Migration
+class CreateExampleIssuePivotTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +12,12 @@ class CreateExamplesRemoteDatumPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('examples_remote_datum', function (Blueprint $table) {
+        Schema::create('examples_issues', function (Blueprint $table) {
             $table->integer('example_id')->unsigned()->index();
             $table->foreign('example_id')->references('id')->on('examples')->onDelete('cascade');
-            $table->integer('remote_datum_id')->unsigned()->index();
-            $table->foreign('remote_datum_id')->references('id')->on('remote_data')->onDelete('cascade');
-            $table->primary(['example_id', 'remote_datum_id']);
+            $table->integer('issue_id')->unsigned()->index();
+            $table->foreign('issue_id')->references('id')->on('issues')->onDelete('cascade');
+            $table->primary(['example_id', 'issue_id']);
         });
     }
 
@@ -28,6 +28,6 @@ class CreateExamplesRemoteDatumPivotTable extends Migration
      */
     public function down()
     {
-        Schema::drop('examples_remote_datum');
+        Schema::drop('example_issue');
     }
 }
