@@ -18,7 +18,8 @@ class CreateIssuesTable extends Migration
             $table->string('name');
             $table->string('slug');
             $table->string('description');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

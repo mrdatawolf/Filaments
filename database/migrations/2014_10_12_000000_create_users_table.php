@@ -21,7 +21,8 @@ class CreateUsersTable extends Migration
             $table->string('provider')->nullable();;
             $table->string('provider_id')->nullable()->unique();
             $table->rememberToken();
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

@@ -17,13 +17,19 @@ class Types extends Model
 
     protected $dates = ['created_at', 'updated_at'];
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function printers()
     {
-        return $this->hasMany('App\Printers');
+        return $this->belongsToMany('App\Printers');
     }
-
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
     public function filaments()
     {
-        return $this->hasMany('App\Filaments');
+        return $this->belongsTo('App\Filaments');
     }
 }

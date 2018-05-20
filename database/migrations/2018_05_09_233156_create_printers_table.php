@@ -17,7 +17,9 @@ class CreatePrintersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->double('version');
-            $table->timestamps();
+            $table->integer('brand_id');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

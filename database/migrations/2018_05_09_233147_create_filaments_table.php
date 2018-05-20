@@ -18,7 +18,10 @@ class CreateFilamentsTable extends Migration
             $table->string('name');
             $table->string('width');
             $table->string('revision');
-            $table->timestamps();
+            $table->integer('brand_id');
+            $table->integer('type_id');
+            $table->timestamp('created_at')->useCurrent();
+            $table->timestamp('updated_at')->useCurrent();
         });
     }
 

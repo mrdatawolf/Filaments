@@ -20,28 +20,44 @@ class Filaments extends Model
     protected $fillable= [
         'name',
         'width',
-        'revision'
+        'revision',
+        'type_id',
+        'brand_id'
     ];
 
     protected $dates = ['created_at', 'updated_at'];
 
-    public function types()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function type()
     {
-        return $this->belongsTo('App\Types', 'type_id', 'id');
+        return $this->hasOne('App\Types');
     }
 
-    public function brands()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function brand()
     {
-        return $this->belongsToMany('App\Brands');
+        return $this->hasOne('App\Brands');
     }
 
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function users()
     {
-        return $this->belongsToMany('App\Users', 'user_id');
+        return $this->belongsToMany('App\Users');
     }
-
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
     public function printers()
     {
-        return $this->belongsToMany('App\Printers', 'printer_id');
+        return $this->belongsToMany('App\Printers');
     }
+
+  
 }
