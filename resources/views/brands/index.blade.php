@@ -5,7 +5,7 @@
         <thead>
             <tr>
             <th>Name</th>
-            <th>Slug</th>
+            <th>Nickname</th>
             </tr>
         </thead>
         <tbody>

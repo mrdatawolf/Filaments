@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Brands;
+use App\Brand;
 
 class BrandController extends Controller
 {
@@ -51,14 +51,14 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands=Brands::all();
+        $brands=Brand::all();
         if($brands->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $brands = Brands::paginate(10);
+            $brands = Brand::paginate(10);
 
             return view('brands/index',compact('brands'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -82,14 +82,14 @@ class BrandController extends Controller
      */
     public function edit(Brands $brand)
     {
-        $brands=Brands::all();
+        $brands=Brand::all();
         if($brands->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $brands = Brands::paginate(10);
+            $brands = Brand::paginate(10);
 
             return view('brands/update',compact('brands'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -108,11 +108,10 @@ class BrandController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        $brand = Brands::find($id);
+        $brand = Brand::find($id);
         $brand->update($request->all());
     
-        return redirect()->route('brands.index')
-                        ->with('success','Brand updated successfully');
+        return redirect()->route('brands.index')->with('success','Brand updated successfully');
     }
     
     /**
@@ -122,8 +121,7 @@ class BrandController extends Controller
      */
     public function destroy($id)
     {
-        Brands::destroy($id);
-        return redirect()->route('brands.index')
-                        ->with('success','Brand record was destoryed');
+        Brand::destroy($id);
+        return redirect()->route('brands.index')->with('success','Brand record was destoryed');
     }
 }

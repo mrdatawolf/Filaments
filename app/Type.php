@@ -5,10 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @property-read Filaments     $filaments
- * @property-read Printers      $printers
+ * @property-read Filament     $filaments
+ * @property-read Printer      $printers
  */
-class Types extends Model
+class Type extends Model
 {
     protected $fillable= [
         'name',
@@ -22,7 +22,7 @@ class Types extends Model
      */
     public function printers()
     {
-        return $this->belongsToMany('App\Printers');
+        return $this->belongsToMany('App\Printer');
     }
     
     /**
@@ -30,6 +30,6 @@ class Types extends Model
      */
     public function filaments()
     {
-        return $this->belongsTo('App\Filaments');
+        return $this->belongsTo('App\Filament');
     }
 }

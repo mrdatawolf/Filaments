@@ -5,17 +5,17 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Filaments class
- * @property-read Brands        $brand
- * @property-read Types         $type
- * @property-read Users         $users
- * @property-read Printers      $printers
+ * Filament class
+ * @property-read Brand        $brand
+ * @property-read Type         $type
+ * @property-read User         $users
+ * @property-read Printer      $printers
  * @property int                $id
  * @property string             $name
  * @property string             $width
  * @property string             $revision
  */
-class Filaments extends Model
+class Filament extends Model
 {
     protected $fillable= [
         'name',
@@ -32,7 +32,7 @@ class Filaments extends Model
      */
     public function type()
     {
-        return $this->hasOne('App\Types');
+        return $this->belongsTo('App\Type');
     }
 
     /**
@@ -40,7 +40,7 @@ class Filaments extends Model
      */
     public function brand()
     {
-        return $this->hasOne('App\Brands');
+        return $this->belongsTo('App\Brand');
     }
 
     /**
@@ -48,7 +48,7 @@ class Filaments extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\Users');
+        return $this->belongsToMany('App\User');
     }
     
     /**
@@ -56,7 +56,7 @@ class Filaments extends Model
      */
     public function printers()
     {
-        return $this->belongsToMany('App\Printers');
+        return $this->belongsToMany('App\Printer');
     }
 
   

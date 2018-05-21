@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Filaments;
-use App\Brands;
-use App\Types;
+use App\Filament;
+use App\Brand;
+use App\Type;
 
 class FilamentController extends Controller
 {
@@ -26,13 +26,13 @@ class FilamentController extends Controller
      */
     public function create()
     {
-        $brands=Brands::all();
+        $brands=Brand::all();
         if($brands->isEmpty())
         {
            return redirect()->action('BrandController@create')->withErrors('No brands were found!  Please create a brand.');
         }
 
-        $types=Types::all();
+        $types=Type::all();
         if($types->isEmpty())
         {
            return redirect()->action('TypeController@create')->withErrors('No types were found!  Please create a type.');
@@ -64,13 +64,13 @@ class FilamentController extends Controller
             'typeId' => (int) trim($requestValues['type_id'])
         ];
        
-        if( Filaments::where('name','like',$checkFor['name'])->where('revision',$checkFor['revision'])->exists())
+        if( Filament::where('name','like',$checkFor['name'])->where('revision',$checkFor['revision'])->exists())
         {
             return redirect()->action('FilamentController@index')->withErrors("The filament already exists!");
         }
         else
         {
-            $filament = new Filaments();
+            $filament = new Filament();
             $filament->name=$checkFor['name'];
             $filament->width=$checkFor['width'];
             $filament->revision=$checkFor['revision'];
@@ -89,14 +89,14 @@ class FilamentController extends Controller
      */
     public function index()
     {
-        $filaments=Filaments::all();
+        $filaments=Filament::all();
         if($filaments->isEmpty())
         {
            return $this->create();
         }
         else
         {
-            $filaments = Filaments::with('types')->paginate(10);
+            $filaments = Filament::with('type')->paginate(10);
 
             return view('filaments/index',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -107,7 +107,7 @@ class FilamentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Filaments $filament)
+    public function show(Filament $filament)
     {
         return view('filaments',compact('filament'));
     }
@@ -118,7 +118,7 @@ class FilamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Filaments $filament)
+    public function edit(Filament $filament)
     {
         return view('filaments/update', compact('filament'));
     }
@@ -130,7 +130,7 @@ class FilamentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Filaments $filament)
+    public function update(Request $request,Filament $filament)
     {
         request()->validate([
             'name' => 'required',

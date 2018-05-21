@@ -14,11 +14,11 @@
     <tbody>
         @foreach($users as $user)
         <tr>
-        <td>{{$user['name']}}</td>
-        <td>{{$user['email']}}</td>
-        <td>{{empty($user['provider']) ? 'Local' : $user['provider'] }}</td>
-        <td>{{$user['created_at']}}</td>
-        <td>{{$user['updated_at']}}</td>
+        <td>{{$user->name}}</td>
+        <td>{{$user->email}}</td>
+        <td>{{empty($user->provider) ? 'Local' : $user->provider }}</td>
+        <td>{{$user->created_at}}</td>
+        <td>{{$user->updated_at}}</td>
         
         <td><a href="{{action('UserController@edit', $user['id'])}}" class="btn btn-warning">Edit</a></td>
         <td>

@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Brands class
- * @property-read Filaments     $filaments
- * @property-read Printers      $printers
+ * Brand class
+ * @property-read Filament     $filaments
+ * @property-read Printer      $printers
  * @property int                $id
  * @property string             $name
  * @property string             $slug
  */
-class Brands extends Model
+class Brand extends Model
 {
     /**
      * {@inheritdoc}
@@ -35,12 +35,12 @@ class Brands extends Model
 
     public function filaments()
     {
-        return $this->hasMany('App\Filaments');
+        return $this->hasMany('App\Filament');
     }
 
     public function printers()
     {
-        return $this->hasMany('App\Printers');
+        return $this->hasMany('App\Printer');
     }
 
 }

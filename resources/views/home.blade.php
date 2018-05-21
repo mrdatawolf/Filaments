@@ -4,18 +4,21 @@
 <table class="table table-striped">
     <thead>
         <tr>
-        <th>Name</th>
-        <th>Width</th>
-        <th>Revision</th>
+            <th>Brand</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Width</th>
+            <th>Revision</th>
         </tr>
     </thead>
     <tbody>
         @foreach($filaments as $filament)
-        @php dd($filament); @endphp
         <tr>
-        <td>{{$filament['name']}}</td>
-        <td>{{$filament['width']}}</td>
-        <td>{{$filament['revision']}}</td>
+        <td>{{$filament->brand->slug}}
+        <td>{{$filament->name}}</td>
+        <td>{{$filament->type->slug}}</td>
+        <td>{{$filament->width}}</td>
+        <td>{{$filament->revision}}</td>
         </tr>
         @endforeach
     </tbody>

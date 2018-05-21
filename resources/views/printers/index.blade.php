@@ -7,16 +7,14 @@
         <th>Brand</th>
         <th>Name</th>
         <th>version</th>
-        <th>Types</th>
         </tr>
     </thead>
     <tbody>
         @foreach($printers as $printer)
         <tr>
-        <td>brand</td>
-        <td>{{$printer['name']}}</td>
-        <td>{{$printer['version']}}</td>
-        <td>types</td>
+        <td>{{$printer->brand->slug}}</td>
+        <td>{{$printer->name}}</td>
+        <td>{{$printer->version}}</td>
         
         <td><a href="{{action('PrinterController@edit', $printer['id'])}}" class="btn btn-warning">Edit</a></td>
         <td>

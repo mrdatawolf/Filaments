@@ -20,9 +20,9 @@ Route::resource('filaments','FilamentController');
 Route::resource('printers','PrinterController');
 Route::resource('brands','BrandController');
 Route::resource('types','TypeController');
-Route::resource('examples','ExamplesController');
-Route::resource('issues','IssuesController');
-Route::resource('notes','NotesController');
+Route::resource('examples','ExampleController');
+Route::resource('issues','IssueController');
+Route::resource('notes','NoteController');
 Route::resource('remoteDatum','RemoteDatumController');
 
 

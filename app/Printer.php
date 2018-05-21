@@ -5,16 +5,16 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Printers class
- * @property-read Brands        $brand
- * @property-read Types         $types
- * @property-read Users         $users
- * @property-read Filaments     $filaments
+ * Printer class
+ * @property-read Brand        $brand
+ * @property-read Type         $types
+ * @property-read User         $users
+ * @property-read Filament     $filaments
  * @property int                $id
  * @property string             $name
  * @property string             $version
  */
-class Printers extends Model
+class Printer extends Model
 {
     /**
      * {@inheritdoc}
@@ -36,7 +36,7 @@ class Printers extends Model
 
     public function brand()
     {
-        return $this->hasOne('App\Brands');
+        return $this->belongsTo('App\Brand');
     }
 
     /**
@@ -44,15 +44,7 @@ class Printers extends Model
      */
     public function types()
     {
-        return $this->belongsToMany('App\Types');
-    }
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasOne
-     */
-    public function brands()
-    {
-        return $this->hasOne('App\Brands');
+        return $this->belongsToMany('App\Type');
     }
 
     /**
@@ -60,7 +52,7 @@ class Printers extends Model
      */
     public function users()
     {
-        return $this->belongsToMany('App\Users');
+        return $this->belongsToMany('App\User');
     }
 
     /**
@@ -68,6 +60,6 @@ class Printers extends Model
      */
     public function filaments()
     {
-        return $this->belongsToMany('App\Filaments');
+        return $this->belongsToMany('App\Filament');
     }
 }

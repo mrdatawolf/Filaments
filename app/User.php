@@ -5,7 +5,10 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Laravel\Passport\HasApiTokens;
-
+/**
+ * @property-read Filaments     $filaments
+ * @property-read Printers      $printers
+ */
 class User extends Authenticatable
 {
     use Notifiable, HasApiTokens;
@@ -30,4 +33,18 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     
+    public function brands()
+    {
+        return $this->hasMany('App\Brand', 'brand_id');
+    }
+
+    public function printers()
+    {
+        return $this->hasMany('App\Printer', 'printer_id');
+    }
+
+    public function filaments()
+    {
+        return $this->hasMany('App\Filament', 'filament_id');
+    }
 }

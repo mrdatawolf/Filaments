@@ -5,6 +5,7 @@
     <thead>
         <tr>
         <th>Name</th>
+        <th>Type</th>
         <th>Width</th>
         <th>Revision</th>
         </tr>
@@ -12,9 +13,10 @@
     <tbody>
         @foreach($filaments as $filament)
         <tr>
-        <td>{{$filament['name']}}</td>
-        <td>{{$filament['width']}}</td>
-        <td>{{$filament['revision']}}</td>
+        <td>{{$filament->name}}</td>
+        <td>{{$filament->type->slug}}</td>
+        <td>{{$filament->width}}</td>
+        <td>{{$filament->revision}}</td>
         <td><a href="{{action('FilamentController@edit', $filament['id'])}}" class="btn btn-warning">Edit</a></td>
         <td>
             <form action="{{action('FilamentController@destroy', $filament['id'])}}" method="post">

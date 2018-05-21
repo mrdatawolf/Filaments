@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Types;
+use App\Type;
 
 class TypeController extends Controller
 {
@@ -39,7 +39,7 @@ class TypeController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        Types::create($request->all());
+        Type::create($request->all());
         return redirect()->route('types.index')
                         ->with('success','Type created successfully');
     }
@@ -51,14 +51,14 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types=Types::all();
+        $types=Type::all();
         if($types->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $types = Types::paginate(10);
+            $types = Type::paginate(10);
             
             return view('types.index',compact('types'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -69,7 +69,7 @@ class TypeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Types $type)
+    public function show(Type $type)
     {
         return view('types.index',compact('type'));
     }
@@ -80,16 +80,16 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Types $type)
+    public function edit(Type $type)
     {
-        $types=Types::all();
+        $types=Type::all();
         if($types->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $types = Types::paginate(10);
+            $types = Type::paginate(10);
 
             return view('types/update',compact('types'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
@@ -108,7 +108,7 @@ class TypeController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        $type = Types::find($id);
+        $type = Type::find($id);
         $type->update($request->all());
         return redirect()->route('types.index')
                         ->with('success','Type updated successfully');
@@ -121,7 +121,7 @@ class TypeController extends Controller
      */
     public function destroy($id)
     {
-        Types::destroy($id);
+        Type::destroy($id);
         return redirect()->route('types.index')
                         ->with('success','Type record was destoryed');
     }
