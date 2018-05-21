@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Types;
+use App\Type;
 
 class TypesTableSeeder extends Seeder
 {
@@ -12,12 +12,12 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        Types::truncate();
-        Types::insert([
+        Type::truncate();
+        Type::insert([
             'name' => 'Polylactic acid',
             'slug' => 'PLA'
         ]);
-        Types::insert([
+        Type::insert([
             'name' => 'Acrylonitrile butadiene styrene',
             'slug' => 'ABS'
         ]);

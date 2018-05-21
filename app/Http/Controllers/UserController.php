@@ -87,7 +87,7 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,User $user)
+    public function update(Request $request, User $user)
     {
         request()->validate([
             'name' => 'required',
@@ -107,5 +107,19 @@ class UserController extends Controller
         User::destroy($id);
         return redirect()->route('users.index')
                         ->with('success','User record was destoryed');
+    }
+
+    public function printers(Request $request, User $user)
+    {
+        //$user = User::find($id);
+        dd($user->printers);
+        //Auth::user()->id
+    }
+
+    public function filaments(Request $request, User $user)
+    {
+        //$user = User::find($id);
+        dd($user->filaments);
+        //Auth::user()->id
     }
 }

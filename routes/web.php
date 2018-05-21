@@ -11,7 +11,8 @@
 |
 */
 
-
+Route::get('users/{id}/printers', 'UserController@printers');
+Route::get('users/{id}/filaments', 'UserController@printfilamentsers');
 
 Auth::routes();
 

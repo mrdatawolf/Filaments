@@ -12,7 +12,7 @@ class CreateExampleIssuePivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('examples_issues', function (Blueprint $table) {
+        Schema::create('example_issue', function (Blueprint $table) {
             $table->integer('example_id')->unsigned()->index();
             $table->foreign('example_id')->references('id')->on('examples')->onDelete('cascade');
             $table->integer('issue_id')->unsigned()->index();

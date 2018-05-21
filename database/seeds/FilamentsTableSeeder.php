@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Filaments;
+use App\Filament;
 
 class FilamentsTableSeeder extends Seeder
 {
@@ -12,8 +12,8 @@ class FilamentsTableSeeder extends Seeder
      */
     public function run()
     {
-        Filaments::truncate();
-        Filaments::insert([
+        Filament::truncate();
+        Filament::insert([
             'name'     => 'Yellow',
             'width'    => 1.75,
             'revision' => '1',

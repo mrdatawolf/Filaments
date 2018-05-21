@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Users;
+use App\User;
 
 class UsersTableSeeder extends Seeder
 {
@@ -12,8 +12,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        Users::truncate();
-        Users::insert([
+        User::truncate();
+        User::insert([
         'name'     => 'Select Mini',
         'email'    => 'patrickmoon@gmail.com',
         'password' => '$2y$10$ZfsYhUz35HQTI2rrp8wRxOFojVmiUnPy9uObqAf4lHOmuXaNSCIRS'

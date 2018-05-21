@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Printers;
-use App\Types;
-use App\Brands;
-use App\Filaments;
+use App\Printer;
+use App\Type;
+use App\Brand;
+use App\Filament;
+use App\User;
 
 class PrintersTableSeeder extends Seeder
 {
@@ -15,19 +16,21 @@ class PrintersTableSeeder extends Seeder
      */
     public function run()
     {
-        Printers::truncate();
-        Printers::insert([
+        Printer::truncate();
+        Printer::insert([
             'name'    => 'Select Mini',
             'version' => '2',
             'brand_id' => 1
         ]);
 
         //do the pivots for a printer
-        $type = Types::where('id',1)->first();
-        $filament = Filaments::where('id',1)->first();
+        $type = Type::find(1);
+        $filament = Filament::find(1);
+        $user = User::find(1);
 
-        $printer = Printers::where('id',1)->first();
+        $printer = Printer::find(1);
         $printer->types()->attach($type);
         $printer->filaments()->attach($filament);
+        $printer->users()->attach($user);
     }
 }

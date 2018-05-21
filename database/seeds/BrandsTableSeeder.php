@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Brands;
+use App\Brand;
 
 class BrandsTableSeeder extends Seeder
 {
@@ -12,8 +12,8 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        Brands::truncate();
-        Brands::insert([
+        Brand::truncate();
+        Brand::insert([
             'name' => 'Hatchbox',
             'slug' => 'HATCH'
         ]);
