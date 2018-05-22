@@ -29,8 +29,11 @@ class PrintersTableSeeder extends Seeder
         $user = User::find(1);
 
         $printer = Printer::find(1);
-        $printer->types()->attach($type);
-        $printer->filaments()->attach($filament);
         $printer->users()->attach($user);
+        $printer = Printer::find(1);
+        $printer->types()->attach($type);
+        $printer = Printer::find(1);
+        $printer->filaments()->attach($filament);
+        
     }
 }
