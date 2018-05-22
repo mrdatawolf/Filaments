@@ -120,6 +120,7 @@ class FilamentController extends Controller
      */
     public function edit(Filament $filament)
     {
+
         return view('filaments/update', compact('filament'));
     }
 
