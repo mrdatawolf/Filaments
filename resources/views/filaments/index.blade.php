@@ -27,6 +27,14 @@
         </td>
         </tr>
         @endforeach
+        <tr>
+            <td>
+                <form action="{{action('FilamentController@create')}}" method="get">
+                    @csrf
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;New</button>
+                </form>
+            </td>
+        </tr>
     </tbody>
 </table>
 @endsection

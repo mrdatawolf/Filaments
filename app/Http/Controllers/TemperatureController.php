@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Brand;
+use App\Temperature;
 
-class BrandController extends Controller
+class TemperatureController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -24,7 +24,7 @@ class BrandController extends Controller
      */
     public function create()
     {
-        return view('brands.create');
+        return view('temperature.create');
     }
 
     /**
@@ -39,9 +39,9 @@ class BrandController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        Brand::create($request->all());
-        return redirect()->route('brands.index')
-                        ->with('success','Brand created successfully');
+        Temperature::create($request->all());
+        return redirect()->route('temperatures.index')
+                        ->with('success','Temperature created successfully');
     }
     
     /**
@@ -51,16 +51,16 @@ class BrandController extends Controller
      */
     public function index()
     {
-        $brands=Brand::all();
-        if($brands->isEmpty())
+        $temperatures=Temperature::all();
+        if($temperatures->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $brands = Brand::paginate(10);
+            $temperatures = Temperature::paginate(10);
 
-            return view('brands/index',compact('brands'))->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('temperatures/index',compact('temperatures'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
     }
 
@@ -69,9 +69,9 @@ class BrandController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Brands $brand)
+    public function show(Temperature $temprature)
     {
-        return view('brands/index',compact('brand'));
+        return view('temperatures/index',compact('temperature'));
     }
 
     /**
@@ -80,18 +80,18 @@ class BrandController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Brands $brand)
+    public function edit(Temperature $temperature)
     {
-        $brands=Brand::all();
-        if($brands->isEmpty())
+        $temperatures=Temprature::all();
+        if($temperatures->isEmpty())
         {
             return $this->create();
         }
         else
         {
-            $brands = Brand::paginate(10);
+            $temperatures = Temperature::paginate(10);
 
-            return view('brands/update',compact('brands'))->with('i', (request()->input('page', 1) - 1) * 5);
+            return view('temperatures/update',compact('temperatures'))->with('i', (request()->input('page', 1) - 1) * 5);
         }
     }
 
@@ -108,10 +108,10 @@ class BrandController extends Controller
             'name' => 'required',
             'slug' => 'required',
         ]);
-        $brand = Brand::find($id);
-        $brand->update($request->all());
+        $temperature = Temperature::find($id);
+        $temperature->update($request->all());
     
-        return redirect()->route('brands.index')->with('success','Brand updated successfully');
+        return redirect()->route('temperatures.index')->with('success','Temperature updated successfully');
     }
     
     /**
@@ -122,6 +122,6 @@ class BrandController extends Controller
     public function destroy($id)
     {
         Brand::destroy($id);
-        return redirect()->route('brands.index')->with('success','Brand record was destoryed');
+        return redirect()->route('temperature.index')->with('success','Temperature record was destoryed');
     }
 }

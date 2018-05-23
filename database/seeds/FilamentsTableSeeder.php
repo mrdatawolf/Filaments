@@ -20,5 +20,12 @@ class FilamentsTableSeeder extends Seeder
             'brand_id' => 1,
             'type_id'  => 1
         ]);
+        Filament::insert([
+            'name'     => 'White',
+            'width'    => 1.75,
+            'revision' => '5',
+            'brand_id' => 3,
+            'type_id'  => 2
+        ]);
     }
 }

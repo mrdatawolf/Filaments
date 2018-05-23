@@ -21,5 +21,9 @@ class BrandsTableSeeder extends Seeder
             'name' => 'MonoPrice',
             'slug' => 'MP'
         ]);
+        Brand::insert([
+            'name' => 'Ziro',
+            'slug' => 'ZIRO'
+        ]);
     }
 }

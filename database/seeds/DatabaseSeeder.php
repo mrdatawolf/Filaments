@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(FilamentsTableSeeder::class);
         $this->call(PrintersTableSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(TemperaturesTableSeeder::class);
     }
 }
