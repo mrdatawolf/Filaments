@@ -7,6 +7,7 @@
         <th>Brand</th>
         <th>Name</th>
         <th>version</th>
+        <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -16,8 +17,7 @@
         <td>{{$printer->name}}</td>
         <td>{{$printer->version}}</td>
         
-        <td><a href="{{action('PrinterController@edit', $printer['id'])}}" class="btn btn-warning">Edit</a></td>
-        <td>
+        <td><a href="{{action('PrinterController@edit', $printer['id'])}}" class="btn btn-warning">Edit</a>
             <form action="{{action('PrinterController@destroy', $printer['id'])}}" method="post">
             @csrf
             <input name="_method" type="hidden" value="DELETE">

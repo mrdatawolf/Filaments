@@ -109,17 +109,27 @@ class UserController extends Controller
                         ->with('success','User record was destoryed');
     }
 
-    public function printers(Request $request, User $user)
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function printers(Request $request)
     {
-        //$user = User::find($id);
-        dd($user->printers);
-        //Auth::user()->id
+        $printers = $request->user()->printers()->paginate(10);
+
+        return view('users.myprinters',compact('printers'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
-    public function filaments(Request $request, User $user)
+    /**
+     * @param  \Illuminate\Http\Request  $request
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function filaments(Request $request)
     {
-        //$user = User::find($id);
-        dd($user->filaments);
-        //Auth::user()->id
+        $filaments = $request->user()->filaments()->paginate(10);
+
+        return view('users.myfilaments',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

@@ -8,6 +8,7 @@
         <th>Type</th>
         <th>Width</th>
         <th>Revision</th>
+        <th>Actions</th>
         </tr>
     </thead>
     <tbody>
@@ -17,8 +18,7 @@
         <td>{{$filament->type->slug}}</td>
         <td>{{$filament->width}}</td>
         <td>{{$filament->revision}}</td>
-        <td><a href="{{action('FilamentController@edit', $filament['id'])}}" class="btn btn-warning">Edit</a></td>
-        <td>
+        <td><a href="{{action('FilamentController@edit', $filament['id'])}}" class="btn btn-warning">Edit</a>
             <form action="{{action('FilamentController@destroy', $filament['id'])}}" method="post">
             @csrf
             <input name="_method" type="hidden" value="DELETE">

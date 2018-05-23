@@ -11,8 +11,6 @@
 |
 */
 
-Route::get('users/{id}/printers', 'UserController@printers');
-Route::get('users/{id}/filaments', 'UserController@printfilamentsers');
 
 Auth::routes();
 
@@ -26,9 +24,11 @@ Route::resource('issues','IssueController');
 Route::resource('notes','NoteController');
 Route::resource('remoteDatum','RemoteDatumController');
 
-
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('landing');
+
+Route::get('users/{id}/printers', 'UserController@printers');
+Route::get('users/{id}/filaments', 'UserController@filaments');
 
 // OAuth Routes
 //Route::get('auth/{provider}', 'Auth\AuthController@redirectToProvider');

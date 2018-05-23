@@ -17,5 +17,9 @@ class BrandsTableSeeder extends Seeder
             'name' => 'Hatchbox',
             'slug' => 'HATCH'
         ]);
+        Brand::insert([
+            'name' => 'MonoPrice',
+            'slug' => 'MP'
+        ]);
     }
 }
