@@ -12,9 +12,15 @@ class SpeedsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         Speed::truncate();
-        
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
         Speed::insert([
             'speed'       => 40,
             'retraction'  => 80,
@@ -29,6 +35,5 @@ class SpeedsTableSeeder extends Seeder
             'user_id'     => 2,
             'printer_id'  => 1
         ]);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

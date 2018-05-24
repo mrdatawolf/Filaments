@@ -12,8 +12,15 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         Brand::truncate();
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
         Brand::insert([
             'name' => 'Hatchbox',
             'slug' => 'HATCH'
@@ -25,7 +32,6 @@ class BrandsTableSeeder extends Seeder
         Brand::insert([
             'name' => 'Ziro',
             'slug' => 'ZIRO'
-        ]);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        ]);   
     }
 }

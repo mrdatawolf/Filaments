@@ -12,9 +12,15 @@ class FilamentsTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         Filament::truncate();
-        
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
         Filament::insert([
             'name'     => 'Yellow',
             'width'    => 1.75,
@@ -29,6 +35,5 @@ class FilamentsTableSeeder extends Seeder
             'brand_id' => 3,
             'type_id'  => 2
         ]);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

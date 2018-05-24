@@ -12,8 +12,15 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         Type::truncate();
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
         
         Type::insert([
             'name' => 'Polylactic acid',
@@ -23,6 +30,5 @@ class TypesTableSeeder extends Seeder
             'name' => 'Acrylonitrile butadiene styrene',
             'slug' => 'ABS'
         ]);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

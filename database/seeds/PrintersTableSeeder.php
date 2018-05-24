@@ -12,15 +12,20 @@ class PrintersTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        }
         Printer::truncate();
-        
+        if(env('DB_CONNECTION') === 'mysql')
+        {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
         Printer::insert([
             'name'    => 'Select Mini',
             'version' => '2',
             'brand_id' => 2
         ]);
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         //do the pivots for a printer
 
         $printer = Printer::find(1);
