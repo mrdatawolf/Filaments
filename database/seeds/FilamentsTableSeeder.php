@@ -12,7 +12,9 @@ class FilamentsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Filament::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Filament::insert([
             'name'     => 'Yellow',
             'width'    => 1.75,

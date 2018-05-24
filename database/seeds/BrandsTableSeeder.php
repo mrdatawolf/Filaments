@@ -12,7 +12,9 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Brand::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Brand::insert([
             'name' => 'Hatchbox',
             'slug' => 'HATCH'
