@@ -13,14 +13,7 @@ class CreateRemoteDatumTable extends Migration
      */
     public function up()
     {
-        Schema::create('remote_datum', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('description');
-            $table->string('location');
-            $table->string('url');
-            $table->integer('note_id');
-            $table->timestamps();
-        });
+        //
     }
 
     /**

@@ -21,10 +21,6 @@ Route::resource('brands','BrandController');
 Route::resource('types','TypeController');
 Route::resource('temperatures','TemperatureController');
 Route::resource('speeds','SpeedController');
-Route::resource('examples','ExampleController');
-Route::resource('issues','IssueController');
-Route::resource('notes','NoteController');
-Route::resource('remoteDatum','RemoteDatumController');
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/', 'HomeController@index')->name('landing');

@@ -12,13 +12,7 @@ class CreateExampleRemoteDatumPivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('example_remote_datum', function (Blueprint $table) {
-            $table->integer('example_id')->unsigned()->index();
-            $table->foreign('example_id')->references('id')->on('examples')->onDelete('cascade');
-            $table->integer('remote_datum_id')->unsigned()->index();
-            $table->foreign('remote_datum_id')->references('id')->on('remote_data')->onDelete('cascade');
-            $table->primary(['example_id', 'remote_datum_id']);
-        });
+        //
     }
 
     /**

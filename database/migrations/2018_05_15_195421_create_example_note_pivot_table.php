@@ -12,13 +12,7 @@ class CreateExampleNotePivotTable extends Migration
      */
     public function up()
     {
-        Schema::create('example_note', function (Blueprint $table) {
-            $table->integer('example_id')->unsigned()->index();
-            $table->foreign('example_id')->references('id')->on('examples')->onDelete('cascade');
-            $table->integer('note_id')->unsigned()->index();
-            $table->foreign('note_id')->references('id')->on('notes')->onDelete('cascade');
-            $table->primary(['example_id', 'note_id']);
-        });
+        //
     }
 
     /**
