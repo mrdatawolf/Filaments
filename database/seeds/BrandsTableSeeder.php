@@ -12,15 +12,9 @@ class BrandsTableSeeder extends Seeder
      */
     public function run()
     {
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
+        Schema::disableForeignKeyConstraints();
         Brand::truncate();
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+        Schema::enableForeignKeyConstraints();
         Brand::insert([
             'name' => 'Hatchbox',
             'slug' => 'HATCH'

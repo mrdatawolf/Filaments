@@ -12,15 +12,9 @@ class TypesTableSeeder extends Seeder
      */
     public function run()
     {
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
+        Schema::disableForeignKeyConstraints();
         Type::truncate();
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+        Schema::enableForeignKeyConstraints();
         
         Type::insert([
             'name' => 'Polylactic acid',

@@ -12,15 +12,9 @@ class FilamentsTableSeeder extends Seeder
      */
     public function run()
     {
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
+        Schema::disableForeignKeyConstraints();
         Filament::truncate();
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+        Schema::enableForeignKeyConstraints();
         Filament::insert([
             'name'     => 'Yellow',
             'width'    => 1.75,

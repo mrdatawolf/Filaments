@@ -12,15 +12,9 @@ class SpeedsTableSeeder extends Seeder
      */
     public function run()
     {
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
+        Schema::disableForeignKeyConstraints();
         Speed::truncate();
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+        Schema::enableForeignKeyConstraints();
         Speed::insert([
             'speed'       => 40,
             'retraction'  => 80,

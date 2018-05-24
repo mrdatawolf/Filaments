@@ -12,15 +12,9 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-        }
+        Schema::disableForeignKeyConstraints();
         User::truncate();
-        if(env('DB_CONNECTION') === 'mysql')
-        {
-            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
-        }
+        Schema::enableForeignKeyConstraints();
 
         User::insert([
             'name'     => 'MrDataWolf',
