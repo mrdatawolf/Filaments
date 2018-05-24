@@ -14,7 +14,7 @@ class TypesTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Type::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
         Type::insert([
             'name' => 'Polylactic acid',
             'slug' => 'PLA'
@@ -23,5 +23,6 @@ class TypesTableSeeder extends Seeder
             'name' => 'Acrylonitrile butadiene styrene',
             'slug' => 'ABS'
         ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

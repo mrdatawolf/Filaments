@@ -14,7 +14,6 @@ class BrandsTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Brand::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         Brand::insert([
             'name' => 'Hatchbox',
             'slug' => 'HATCH'
@@ -27,5 +26,6 @@ class BrandsTableSeeder extends Seeder
             'name' => 'Ziro',
             'slug' => 'ZIRO'
         ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

@@ -14,13 +14,13 @@ class PrintersTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Printer::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
         Printer::insert([
             'name'    => 'Select Mini',
             'version' => '2',
             'brand_id' => 2
         ]);
-
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
         //do the pivots for a printer
 
         $printer = Printer::find(1);

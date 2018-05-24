@@ -14,7 +14,7 @@ class TemperaturesTableSeeder extends Seeder
     {
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
         Temperature::truncate();
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        
         Temperature::insert([
             'celsius'     => 200,
             'filament_id' => 1,
@@ -27,5 +27,6 @@ class TemperaturesTableSeeder extends Seeder
             'user_id'     => 2,
             'printer_id'  => 1
         ]);
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
