@@ -36,6 +36,8 @@
                     <a class="dropdown-item" href="{{ url('/printers') }}"><i class="fas fa-print"></i> Printers</a>
                     <a class="dropdown-item" href="{{ url('/filaments') }}"><i class="fas fa-circle-notch"></i> Filaments</a>
                     <a class="dropdown-item" href="{{ url('/types') }}"><i class="fas fa-tags"></i> Types</a>
+                    <a class="dropdown-item" href="{{ url('/temperatures') }}"><i class="fas fa-thermometer"></i> Temperatures</a>
+                    <a class="dropdown-item" href="{{ url('/speeds') }}"><i class="fas fa-fighter-jet"></i> Speeds</a>
                     <a class="dropdown-item" href="{{ url('/users') }}"><i class="fas fa-users"></i> Users</a>
                     <!--<a class="dropdown-item" href="{{ url('/notes') }}"><i class="fas fa-gavel"></i> Notes</a>
                     <a class="dropdown-item" href="{{ url('/examples') }}"><i class="fas fa-gift"></i> Examples</a>

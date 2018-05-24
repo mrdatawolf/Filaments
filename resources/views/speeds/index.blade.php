@@ -1,10 +1,11 @@
 @extends('layouts.app')
-@section('pageTitle','view temperature')
+@section('pageTitle','view speed')
 @section('content')
     <table class="table table-striped">
         <thead>
             <tr>
-                <th>Celsius</th>
+                <th>Retraction</th>
+                <th>Speed</th>
                 <th>User</th>
                 <th>Printer</th>
                 <th>Filament</th>
@@ -12,15 +13,16 @@
         </thead>
         <tbody>
             
-            @foreach($temperatures as $temperature)
+            @foreach($speeds as $speed)
             <tr>
-                <td>{{$temperature->celsius}}</td>
-                <td>{{$temperature->user->name}}</td>
-                <td>{{$temperature->printer->name}}</td>
-                <td>{{$temperature->filament->name}}</td>
+                <td>{{$speed->retraction}}</td>
+                <td>{{$speed->speed}}</td>
+                <td>{{$speed->user->name}}</td>
+                <td>{{$speed->printer->name}}</td>
+                <td>{{$speed->filament->name}}</td>
                 
-                <td><a href="{{action('TemperatureController@edit', $temperature['id'])}}" class="btn btn-warning">Edit</a>
-                    <form action="{{action('TemperatureController@destroy', $temperature['id'])}}" method="post">
+                <td><a href="{{action('SpeedController@edit', $speed['id'])}}" class="btn btn-warning">Edit</a>
+                    <form action="{{action('SpeedController@destroy', $speed['id'])}}" method="post">
                     @csrf
                     <input name="_method" type="hidden" value="DELETE">
                     <button class="btn btn-danger" type="submit">Delete</button>
@@ -30,7 +32,7 @@
             @endforeach
             <tr>
                 <td>
-                    <form action="{{action('TemperatureController@create')}}" method="get">
+                    <form action="{{action('SpeedController@create')}}" method="get">
                         @csrf
                         <button type="submit" class="btn btn-primary"><i class="fas fa-plus"></i>&nbsp;New</button>
                     </form>

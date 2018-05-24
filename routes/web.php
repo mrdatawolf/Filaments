@@ -20,6 +20,7 @@ Route::resource('printers','PrinterController');
 Route::resource('brands','BrandController');
 Route::resource('types','TypeController');
 Route::resource('temperatures','TemperatureController');
+Route::resource('speeds','SpeedController');
 Route::resource('examples','ExampleController');
 Route::resource('issues','IssueController');
 Route::resource('notes','NoteController');

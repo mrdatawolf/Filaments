@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Temperature;
+use App\Printer;
+use App\Filament;
 
 class TemperatureController extends Controller
 {
@@ -24,7 +26,18 @@ class TemperatureController extends Controller
      */
     public function create()
     {
-        return view('temperature.create');
+        $printers=Printer::all();
+        if($printers->isEmpty())
+        {
+           return redirect()->action('PrinterController@create')->withErrors('No printers were found!  Please create a printer.');
+        }
+
+        $filaments=Filament::all();
+        if($filaments->isEmpty())
+        {
+           return redirect()->action('FilamentController@create')->withErrors('No filaments were found!  Please create a filament.');
+        }
+        return view('temperatures.create', compact('printers','filaments'));
     }
 
     /**
@@ -36,9 +49,12 @@ class TemperatureController extends Controller
     public function store(Request $request)
     {
         request()->validate([
-            'name' => 'required',
-            'slug' => 'required',
+            'celsius' => 'required',
+            'user_id' => 'required',
+            'printer_id' => 'required',
+            'filament_id' => 'required',
         ]);
+    
         Temperature::create($request->all());
         return redirect()->route('temperatures.index')
                         ->with('success','Temperature created successfully');
@@ -122,6 +138,6 @@ class TemperatureController extends Controller
     public function destroy($id)
     {
         Brand::destroy($id);
-        return redirect()->route('temperature.index')->with('success','Temperature record was destoryed');
+        return redirect()->route('temperatures.index')->with('success','Temperature record was destoryed');
     }
 }
