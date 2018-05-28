@@ -58,6 +58,12 @@ class Filament extends Model
     {
         return $this->belongsToMany('App\Printer');
     }
-
-  
+    
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function temperatures()
+    {
+        return $this->belongsToMany('App\Printer');
+    } 
 }

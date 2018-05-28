@@ -36,9 +36,9 @@
         <td>{{$filament->type->slug}}</td>
         <td>{{$filament->width}}</td>
         <td>{{$filament->revision}}</td>
-        <td>80</td>
+        <td>50</td>
         <td>40</td>
-        <td>205</td>
+        <td>{{$filament->temperature()->temp}}</td>
         <td>50</td>
         <td>65</td>
         <td>50</td>

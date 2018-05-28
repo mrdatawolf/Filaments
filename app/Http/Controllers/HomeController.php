@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Filament;
 use App\Brand;
+//use App\Speed;
 use App\Http\Controllers\FilamentController;
 
 class HomeController extends Controller
@@ -67,7 +68,9 @@ class HomeController extends Controller
             return redirect()->action('FilamentController@create')->withErrors('No filaments were found!  Please create a filament.');
         }
 
-        $filaments=Filament::with('brand','type')->paginate(10);
+        //$speeds=Speed::all();
+
+        $filaments=Filament::with('brand','type','temperature')->paginate(10);
     
         return view('home',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
