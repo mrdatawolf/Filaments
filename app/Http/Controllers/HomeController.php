@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Filament;
 use App\Brand;
+use App\User;
 //use App\Speed;
 use App\Http\Controllers\FilamentController;
 
@@ -62,16 +63,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $filaments=Filament::all();
-        if($filaments->isEmpty())
-        {
-            return redirect()->action('FilamentController@create')->withErrors('No filaments were found!  Please create a filament.');
-        }
-
-        //$speeds=Speed::all();
-
-        $filaments=Filament::with('brand','type','temperature')->paginate(10);
+        $user = User::where('id',auth()->user()->id)->with(['printers','filaments'])->first();
     
-        return view('home',compact('filaments'))->with('i', (request()->input('page', 1) - 1) * 5);
+        if($user->filaments->isEmpty())
+        {
+            return redirect()->action('FilamentController@create')->withErrors('No filaments were found!  Please link a filament.');
+        }
+        elseif($user->printers->isEmpty())
+        {
+            return redirect()->action('PrinterController@create')->withErrors('No printers were found!  Please link a printer.');
+        }
+        $filaments=$user->filaments;
+        $printers=$user->printers;
+        //$speeds=Speed::all();
+    
+        return view('home',compact('filaments','printers'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 }

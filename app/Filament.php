@@ -6,10 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Filament class
- * @property-read Brand        $brand
- * @property-read Type         $type
- * @property-read User         $users
- * @property-read Printer      $printers
+ * @property-read Brand         $brand
+ * @property-read Type          $type
+ * @property-read User          $users
+ * @property-read Printer       $printers
+ * @property-read Temperature   $temperature
  * @property int                $id
  * @property string             $name
  * @property string             $width
@@ -44,6 +45,14 @@ class Filament extends Model
     }
 
     /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function temperature()
+    {
+        return $this->belongsTo('App\Temperature');
+    } 
+
+    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function users()
@@ -58,12 +67,4 @@ class Filament extends Model
     {
         return $this->belongsToMany('App\Printer');
     }
-    
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function temperatures()
-    {
-        return $this->belongsToMany('App\Printer');
-    } 
 }
